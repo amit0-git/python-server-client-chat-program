@@ -1,0 +1,26 @@
+import socket,sys,time
+s=socket.socket()
+host=socket.gethostname()
+print('server will start on: ',host)
+port=8080
+s.bind((host,port))
+print('')
+print('server binded to host and port')
+print('')
+print('server waiting for connection')
+print('')
+s.listen(1)
+conn,addr=s.accept()
+print(addr,'has connected to server')
+print('')
+
+while 1:
+	message=input(str('>>'))
+	message=message.encode()
+	conn.send(message)
+	print('msg sent')
+	print('')
+	incmmsg=conn.recv(1024)
+	incmmsg=incmmsg.decode()
+	print('Client',incmmsg)
+	print('')
